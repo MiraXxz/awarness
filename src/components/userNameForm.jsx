@@ -7,7 +7,9 @@ import Form from "./common/form";
 class UserNameForm extends Form {
   state = {
     data: { username: "" },
-    errors: {}
+    errors: {},
+    next: 1,
+    valid: true
   };
 
   schema = {
@@ -36,7 +38,9 @@ class UserNameForm extends Form {
 
   doSubmit = () => {
     //call to server
-    this.props.history.replace("/signin/password");
+
+    if (this.state.valid) this.props.callbackFromParent(this.state.next);
+    // this.props.history.replace("/signin/password");
     console.log("submitted");
   };
 
@@ -57,8 +61,6 @@ class UserNameForm extends Form {
             </div>
 
             <div className="row">{this.renderButton("التالي")}</div>
-
-            {/* <Link to="#">Forgot username?</Link> */}
           </div>
         </form>
       </React.Fragment>

@@ -31,6 +31,7 @@ class Input extends Component {
               placeholder={this.props.placeholder}
               className="form-control input-borders"
               maxLength={this.props.maxLength}
+              disabled={this.props.disabled}
             />
 
             {this.props.type === "password" && (

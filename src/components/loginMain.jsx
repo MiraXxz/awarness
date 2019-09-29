@@ -13,9 +13,19 @@ import NewPasswordForm from "./newPasswordForm";
 import AdminHomePage from "./adminHomePage";
 import PasswordForm from "./passwordForm";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
+import Carousel from "./common/carousel";
+import LoginForm from "./loginform";
+import ForgotPasswordForm from "./forgotPasswordForm";
 
 class LoginMain extends Component {
-  state = {};
+  state = { page: 10 };
+
+  switchPage = dataFromChild => {
+    console.log(dataFromChild);
+    this.setState({ page: dataFromChild });
+    console.log(this.state);
+  };
+
   render() {
     return (
       <React.Fragment>
@@ -25,17 +35,81 @@ class LoginMain extends Component {
             backgroundImage: `url(${loginImg})`
           }}
         />
-        <div className="img-bg-transparent" />
+        {/* <div className="img-bg-transparent" /> */}
 
         <div
           className="container-fluid main-cont m-0"
           style={{ width: "100%" }}
         >
           <div className="row justify-content-end min-vh-100 main-row align-items-center">
-            <div className="col my-auto h-100 main-col col-xs-4 col-md-6 col-sm-6 col-lg-4 text-center align-items-center flex-column pr-5 pl-5 pr-sm-5 pl-sm-5 pb-sm-5 ">
+            <div className="col my-auto h-100 main-col col-xs-4 col-md-6 col-sm-6 col-lg-4 text-center align-items-center flex-column pr-5 pl-5 pr-sm-5 pl-sm-5 pb-sm-5 min-vh-100">
               <h1 className="awareness-header mt-5">Orcas Awareness</h1>
 
-              <Switch>
+              {(() => {
+                console.log(this.state.page);
+                switch (this.state.page) {
+                  case 0:
+                    return (
+                      <UserNameForm
+                        forgot={false}
+                        callbackFromParent={this.switchPage}
+                      />
+                    );
+                  case 1:
+                    return (
+                      <PasswordForm callbackFromParent={this.switchPage} />
+                    );
+                  case 2:
+                    return (
+                      <VerificationCodeForm
+                        callbackFromParent={this.switchPage}
+                      />
+                    );
+                  case 3:
+                    return (
+                      <NewPasswordForm callbackFromParent={this.switchPage} />
+                    );
+                  case 4:
+                    return (
+                      <AdminHomePage callbackFromParent={this.switchPage} />
+                    );
+
+                  case 5:
+                    return (
+                      <UserNameForm callbackFromParent={this.switchPage} />
+                    );
+
+                  case 20:
+                    return (
+                      <ForgotPasswordForm
+                        callbackFromParent={this.switchPage}
+                      />
+                    );
+
+                  case 7:
+                    return (
+                      <UserNameForm
+                        forgot={true}
+                        callbackFromParent={this.switchPage}
+                      />
+                    );
+
+                  case 10:
+                    return (
+                      <LoginForm
+                        forgot={false}
+                        callbackFromParent={this.switchPage}
+                      />
+                    );
+
+                  default:
+                    return (
+                      <UserNameForm callbackFromParent={this.switchPage} />
+                    );
+                }
+              })()}
+
+              {/* <Switch>
                 <Route path="/signin/username" component={UserNameForm} />
                 <Route path="/signin/password" component={PasswordForm} />
                 <Route path="/signinfirst" component={UserNameForm} />
@@ -44,7 +118,7 @@ class LoginMain extends Component {
                 <Route path="/newpassword" component={NewPasswordForm} />
                 <Route path="/adminhome" component={AdminHomePage} />
                 <Route path="/" component={UserNameForm} />
-              </Switch>
+              </Switch> */}
 
               {/* <Route
                 render={location => (
@@ -69,94 +143,8 @@ class LoginMain extends Component {
               </p> */}
             </div>
 
-            <div className="col main-col-2 col-xs-8 col-md-6 col-sm-6 col-lg-8 text-center align-items-center flex-column  pt-4 pr-5 pl-5 ">
-              <div class="bd-example">
-                <div
-                  id="carouselExampleCaptions"
-                  class="carousel slide"
-                  data-ride="carousel"
-                >
-                  <ol className="carousel-indicators">
-                    <li
-                      data-target="#carouselExampleCaptions"
-                      data-slide-to="0"
-                      className="active"
-                    ></li>
-                    <li
-                      data-target="#carouselExampleCaptions"
-                      data-slide-to="1"
-                    ></li>
-                    <li
-                      data-target="#carouselExampleCaptions"
-                      data-slide-to="2"
-                    ></li>
-                  </ol>
-                  <div className="carousel-inner">
-                    <div className="carousel-item active">
-                      <img src={loginImg} className="d-block w-100" alt="..." />
-                      <div className="carousel-caption d-none d-md-block">
-                        <h5>First slide label</h5>
-                        <p>
-                          Nulla vitae elit libero, a pharetra augue mollis
-                          interdum.
-                        </p>
-                      </div>
-                    </div>
-                    <div className="carousel-item">
-                      <img
-                        src={slideImage1}
-                        className="d-block w-100"
-                        alt="..."
-                      />
-                      <div className="carousel-caption d-none d-md-block ">
-                        <h5>Second slide label</h5>
-                        <p>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit.
-                        </p>
-                      </div>
-                    </div>
-                    <div className="carousel-item">
-                      <img
-                        src={slideImage2}
-                        className="d-block w-100"
-                        alt="..."
-                      />
-                      <div className="carousel-caption d-none d-md-block">
-                        <h5>Third slide label</h5>
-                        <p>
-                          Praesent commodo cursus magna, vel scelerisque nisl
-                          consectetur.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <a
-                    className="carousel-control-prev"
-                    href="#carouselExampleCaptions"
-                    role="button"
-                    data-slide="prev"
-                  >
-                    <span
-                      className="carousel-control-prev-icon"
-                      aria-hidden="true"
-                    ></span>
-                    <span className="sr-only">السابق</span>
-                  </a>
-                  <a
-                    className="carousel-control-next"
-                    href="#carouselExampleCaptions"
-                    role="button"
-                    data-slide="next"
-                  >
-                    <span
-                      className="carousel-control-next-icon"
-                      aria-hidden="true"
-                    ></span>
-                    <span className="sr-only">التالي</span>
-                  </a>
-                </div>
-              </div>
+            <div className="col main-col-2 col-xs-8 col-md-6 col-sm-6 col-lg-8 text-center align-items-center flex-column  pt-4 pr-5 pl-5 d-none d-md-block">
+              <Carousel></Carousel>
             </div>
           </div>
         </div>

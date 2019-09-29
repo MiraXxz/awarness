@@ -10,10 +10,9 @@ class NewPasswordForm extends Form {
     data: { password: "", passwordConfirm: "", accepted: false },
     errors: { password: "", passwordConfirm: "" },
     pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
-    // specialCahara: /^(?=.*[!@#\$%\^&\*])/,
-    // numbers: /^(?=.*[0-9])/,
-    lower: /^(?=.*[a-z])/,
-    upper: /^(?=.*[A-Z])/
+    firstTimeUser: true,
+    next: 4,
+    valid: true
   };
 
   schema = {
@@ -72,7 +71,8 @@ class NewPasswordForm extends Form {
 
   doSubmit = () => {
     //call to server
-    this.props.history.replace("/NewPasswordForm");
+    if (this.state.valid) this.props.callbackFromParent(this.state.next);
+    // this.props.history.replace("/NewPasswordForm");
     console.log("submitted");
   };
 

@@ -11,7 +11,10 @@ class VerificationCodeForm extends Form {
     data: { veriCode: "" },
     errors: {},
     pattern: /^(?=.*[a-z])(?=.*[0-9])/,
-    resendCounter: 0
+    resendCounter: 0,
+    next: 3,
+    cancel: 0,
+    valid: true
   };
 
   schema = {
@@ -49,8 +52,14 @@ class VerificationCodeForm extends Form {
 
   doSubmit = () => {
     //call to server
-    this.props.history.replace("/newpassword");
+
+    if (this.state.valid) this.props.callbackFromParent(this.state.next);
+    // this.props.history.replace("/newpassword");
     console.log("submitted");
+  };
+
+  handleCancel = () => {
+    this.props.callbackFromParent(this.state.cancel);
   };
 
   render() {
@@ -95,6 +104,12 @@ class VerificationCodeForm extends Form {
           )}
 
           <div className="row pt-5">
+            <a href="#" className="text-danger" onClick={this.handleCancel}>
+              إلغاء
+            </a>
+          </div>
+
+          {/* <div className="row pt-5">
             <Link
               replace
               to="/signin/username"
@@ -102,7 +117,7 @@ class VerificationCodeForm extends Form {
             >
               إلغاء
             </Link>
-          </div>
+          </div> */}
         </form>
       </React.Fragment>
     );

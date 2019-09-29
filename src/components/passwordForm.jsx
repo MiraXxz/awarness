@@ -7,7 +7,10 @@ import { Link } from "react-router-dom";
 class PasswordForm extends Form {
   state = {
     data: { password: "" },
-    errors: {}
+    errors: {},
+    next: 4,
+    forgot: 5,
+    valid: true
   };
 
   schema = {
@@ -35,7 +38,8 @@ class PasswordForm extends Form {
 
   doSubmit = () => {
     //call to server
-    window.location = "/adminhome";
+    if (this.state.valid) this.props.callbackFromParent(this.state.next);
+    // window.location = "/adminhome";
     // this.props.history.replace("/adminhome");
     console.log("submitted");
   };
@@ -58,7 +62,12 @@ class PasswordForm extends Form {
             <div className="row">{this.renderButton("دخول")}</div>
 
             <div className="row end-row">
-              <Link to="/signin">نسيت كلمة المرور؟ </Link>
+              <a
+                href="#"
+                onClick={() => this.props.callbackFromParent(this.state.forgot)}
+              >
+                نسيت كلمة المرور؟
+              </a>
             </div>
           </div>
         </form>

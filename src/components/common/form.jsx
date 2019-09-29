@@ -21,13 +21,6 @@ class Form extends Component {
       error = Joi.validate(this.state.data, this.schema, options).error;
     }
 
-    // if ("passwordConfirm" in this.state.data) {
-    //   if (this.state.data.passwordConfirm !== this.state.data.password) {
-    //     error = "testError";
-    //     return error;
-    //   }
-    // }
-
     if (!error) return null;
 
     const errors = {};
@@ -60,28 +53,24 @@ class Form extends Component {
       if (error) {
         if (
           error.details[0].message === "كلمة المرور والإعادة غير متطابقتان" &&
-          obj.passwordConfirm === this.state.password
+          obj.passwordConfirm === this.state.data.password
         ) {
           error = null;
           console.log("test");
         }
       }
     }
-
-    // if (!error && "passwordConfirm" in this.state.data) console.log("no error");
-
-    // if (!error && "passwordConfirm" in this.state.data) {
-    //   if (obj["passwordConfirm"] !== this.state.data.password) {
-    //     error = "testError";
-    //     return error;
-    //   } else if (obj["password"] !== this.state.data.passwordConfirm) {
-    //     error = "testError";
-    //     console.log(error);
-    //     return error;
-    //   } else return null;
+    // else if (name === "password") {
+    //   if (error) {
+    //     if (
+    //       error.details[0].message === "كلمة المرور والإعادة غير متطابقتان" &&
+    //       obj.password === this.state.data.passwordConfirm
+    //     ) {
+    //       error = null;
+    //       console.log("test");
+    //     }
+    //   }
     // }
-
-    // console.log(this.state.errors, error);
 
     return error ? error.details[0].message : null;
   };
@@ -109,22 +98,11 @@ class Form extends Component {
       data[input.name] = !this.state.data.accepted;
     } else data[input.name] = input.value;
 
-    // if ("passwordConfirm" in this.state.data) {
-    //   if (
-    //     this.state.errors.password === "testError" &&
-    //     input.name === "passwordConfirm" &&
-    //     errors["passwordConfirm"] === ""
-    //   ) {
-    //     errors = { password: "", passwordConfirm: "" };
-    //   } else if (
-    //     this.state.errors.passwordConfirm === "testError" &&
-    //     input.password === "passwordConfirm" &&
-    //     errors["passwordConfirm"] === ""
-    //   ) {
-    //     errors = { password: "", passwordConfirm: "" };
-    //     console.log("test1");
-    //   }
-    // }
+    if ("passwordConfirm" in this.state.data && input.name === "password") {
+      if (this.state.data.passwordConfirm !== data.password) {
+        errors.passwordConfirm = "كلمة المرور والإعادة غير متطابقتان";
+      }
+    }
 
     this.setState({ data, errors });
   };
@@ -171,7 +149,25 @@ class Form extends Component {
     );
   };
 
-  renderInput = (name, placeholder, type, maxlength = 255) => {
+  // renderButtonSecondary = (label, classes = "btn btn-primary") => {
+  //   return (
+  //     <button
+  //       style={{ width: "100%", marginTop: "5%" }}
+  //       className={classes}
+  //       onClick={this.checkUsername}
+  //     >
+  //       {label}
+  //     </button>
+  //   );
+  // };
+
+  renderInput = (
+    name,
+    placeholder,
+    type,
+    maxlength = 255,
+    disabled = false
+  ) => {
     return (
       <Input
         name={name}
@@ -181,6 +177,7 @@ class Form extends Component {
         type={type}
         error={this.state.errors[name]}
         maxLength={maxlength}
+        disabled={disabled}
       />
     );
   };

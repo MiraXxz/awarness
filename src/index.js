@@ -10,6 +10,8 @@ import "font-awesome/css/font-awesome.css";
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import LoginMain from "./components/loginMain";
 
+import LoginForm from "./components/loginform";
+
 ReactDOM.render(
   <BrowserRouter>
     <LoginMain></LoginMain>
