@@ -8,7 +8,7 @@ class ForgotPasswordForm extends Form {
   state = {
     data: { username: "", veriCode: "" },
     errors: {},
-    next: 3,
+    next: 33,
     valid: true,
     validCode: false,
     validUsername: false,

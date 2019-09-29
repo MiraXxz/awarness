@@ -10,7 +10,8 @@ class NewPasswordForm extends Form {
     data: { password: "", passwordConfirm: "", accepted: false },
     errors: { password: "", passwordConfirm: "" },
     pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
-    firstTimeUser: true,
+    firstTimeUser: this.props.firstTime,
+
     next: 4,
     valid: true
   };
@@ -103,6 +104,8 @@ class NewPasswordForm extends Form {
               )}
             </div>
 
+            {/* only show this if user is new  */}
+            {/* ignore validating it if not new */}
             <div className="row justify-content-start mt-md-3 mb-md-3">
               <div className="custom-control custom-checkbox my-1 mr-sm-2 custom-control-right">
                 <input

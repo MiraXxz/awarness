@@ -67,8 +67,12 @@ class LoginMain extends Component {
                     );
                   case 3:
                     return (
-                      <NewPasswordForm callbackFromParent={this.switchPage} />
+                      <NewPasswordForm
+                        firstTime={false}
+                        callbackFromParent={this.switchPage}
+                      />
                     );
+
                   case 4:
                     return (
                       <AdminHomePage callbackFromParent={this.switchPage} />
@@ -98,6 +102,14 @@ class LoginMain extends Component {
                     return (
                       <LoginForm
                         forgot={false}
+                        callbackFromParent={this.switchPage}
+                      />
+                    );
+
+                  case 33:
+                    return (
+                      <NewPasswordForm
+                        firstTime={true}
                         callbackFromParent={this.switchPage}
                       />
                     );
