@@ -18,7 +18,7 @@ import LoginForm from "./loginform";
 import ForgotPasswordForm from "./forgotPasswordForm";
 
 class LoginMain extends Component {
-  state = { page: 10 };
+  state = { page: 0 };
 
   switchPage = dataFromChild => {
     console.log(dataFromChild);
@@ -50,22 +50,54 @@ class LoginMain extends Component {
                 switch (this.state.page) {
                   case 0:
                     return (
-                      <UserNameForm
+                      <LoginForm
                         forgot={false}
+                        firstTime={false}
                         callbackFromParent={this.switchPage}
                       />
                     );
+
                   case 1:
                     return (
-                      <PasswordForm callbackFromParent={this.switchPage} />
+                      <LoginForm
+                        forgot={false}
+                        firstTime={true}
+                        callbackFromParent={this.switchPage}
+                      />
                     );
+
                   case 2:
                     return (
                       <VerificationCodeForm
+                        firstTime={false}
                         callbackFromParent={this.switchPage}
                       />
                     );
+
+                  case 22:
+                    return (
+                      <VerificationCodeForm
+                        firstTime={true}
+                        callbackFromParent={this.switchPage}
+                      />
+                    );
+
                   case 3:
+                    return (
+                      <ForgotPasswordForm
+                        callbackFromParent={this.switchPage}
+                      />
+                    );
+
+                  case 4:
+                    return (
+                      <NewPasswordForm
+                        firstTime={true}
+                        callbackFromParent={this.switchPage}
+                      />
+                    );
+
+                  case 5:
                     return (
                       <NewPasswordForm
                         firstTime={false}
@@ -73,45 +105,9 @@ class LoginMain extends Component {
                       />
                     );
 
-                  case 4:
+                  case 6:
                     return (
                       <AdminHomePage callbackFromParent={this.switchPage} />
-                    );
-
-                  case 5:
-                    return (
-                      <UserNameForm callbackFromParent={this.switchPage} />
-                    );
-
-                  case 20:
-                    return (
-                      <ForgotPasswordForm
-                        callbackFromParent={this.switchPage}
-                      />
-                    );
-
-                  case 7:
-                    return (
-                      <UserNameForm
-                        forgot={true}
-                        callbackFromParent={this.switchPage}
-                      />
-                    );
-
-                  case 10:
-                    return (
-                      <LoginForm
-                        forgot={false}
-                        callbackFromParent={this.switchPage}
-                      />
-                    );
-
-                  case 33:
-                    return (
-                      <NewPasswordForm
-                        firstTime={true}
-                        callbackFromParent={this.switchPage}
-                      />
                     );
 
                   default:

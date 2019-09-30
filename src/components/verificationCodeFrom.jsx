@@ -12,9 +12,9 @@ class VerificationCodeForm extends Form {
     errors: {},
     pattern: /^(?=.*[a-z])(?=.*[0-9])/,
     resendCounter: 0,
-    next: 3,
-    cancel: 0,
-    valid: true
+
+    valid: true,
+    pages: { goNewPass: 4, goCancel: 1 }
   };
 
   schema = {
@@ -53,13 +53,14 @@ class VerificationCodeForm extends Form {
   doSubmit = () => {
     //call to server
 
-    if (this.state.valid) this.props.callbackFromParent(this.state.next);
+    if (this.state.valid)
+      this.props.callbackFromParent(this.state.pages.goNewPass);
     // this.props.history.replace("/newpassword");
     console.log("submitted");
   };
 
   handleCancel = () => {
-    this.props.callbackFromParent(this.state.cancel);
+    this.props.callbackFromParent(this.state.pages.goCancel);
   };
 
   render() {

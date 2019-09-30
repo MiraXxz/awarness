@@ -11,9 +11,15 @@ class LoginForm extends Form {
     valid: true,
     validUsername: false,
     buttonr: 1,
-    next: 4,
-    forgot: this.props.forgot,
-    nextForgot: 20
+    pages: {
+      goHome: 6,
+      goVerify: 2,
+      goForgotPass: 3,
+      goCancel: 0,
+      goCancelFirst: 1
+    },
+
+    firstTimeUser: this.props.firstTime
   };
 
   schema = {
@@ -85,24 +91,32 @@ class LoginForm extends Form {
   doSubmit = () => {
     //call to server
 
-    if (this.state.valid) this.props.callbackFromParent(this.state.next);
-    // this.props.history.replace("/signin/password");
+    if (this.state.firstTimeUser && this.state.valid)
+      this.props.callbackFromParent(this.state.pages.goVerify);
+    else if (this.state.valid && !this.state.firstTimeUser)
+      this.props.callbackFromParent(this.state.pages.goHome);
     console.log("submitted");
   };
 
   checkUsername = e => {
     e.preventDefault();
-    //callback to server // if exists
 
-    this.setState({ validUsername: true, buttonr: 2 });
-    console.log(this.state);
+    //check user valid or not valid on the server
+    //check if username is a firstTime user or not and set state accordingly
+
+    if (!this.state.firstTimeUser) {
+      this.setState({ validUsername: true, buttonr: 2 });
+      console.log(this.state.validUsername && this.state.firstTimeUser);
+    } else if (this.state.firstTimeUser)
+      this.props.callbackFromParent(this.state.pages.goVerify);
   };
 
   handleCancel = () => {
-    this.props.callbackFromParent(this.state.cancel);
+    this.props.callbackFromParent(this.state.pages.goCancel);
   };
 
   render() {
+    console.log(this.state);
     return (
       <React.Fragment>
         <form onSubmit={this.handleSubmit}>
@@ -130,7 +144,7 @@ class LoginForm extends Form {
               </div>
             ) : null}
 
-            {this.state.validUsername && (
+            {this.state.validUsername && !this.state.firstTimeUser ? (
               <div>
                 <div className="row">
                   <p className="text-white">قم بإدخال كلمة المرور</p>
@@ -141,18 +155,20 @@ class LoginForm extends Form {
 
                 <div className="row">{this.renderButton("التالي")}</div>
               </div>
-            )}
+            ) : null}
 
-            <div className="row mt-3">
-              <a
-                href="#"
-                onClick={() =>
-                  this.props.callbackFromParent(this.state.nextForgot)
-                }
-              >
-                نسيت كلمة المرور؟
-              </a>
-            </div>
+            {!this.state.firstTimeUser ? (
+              <div className="row mt-3">
+                <a
+                  href="#"
+                  onClick={() =>
+                    this.props.callbackFromParent(this.state.pages.goForgotPass)
+                  }
+                >
+                  نسيت كلمة المرور؟
+                </a>
+              </div>
+            ) : null}
           </div>
         </form>
       </React.Fragment>

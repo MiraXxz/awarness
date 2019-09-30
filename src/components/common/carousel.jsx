@@ -11,7 +11,7 @@ class Carousel extends Component {
       <React.Fragment>
         <div
           id="carouselExampleIndicators"
-          class="carousel slide"
+          className="carousel slide"
           data-ride="carousel"
         >
           <ol className="carousel-indicators">

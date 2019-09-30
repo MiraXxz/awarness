@@ -86,6 +86,7 @@ class Form extends Component {
   };
 
   handleChange = ({ currentTarget: input }) => {
+    console.log("handlechange called", input);
     let errors = { ...this.state.errors };
     const errorMessage = this.validateProperty(input);
 
@@ -103,8 +104,19 @@ class Form extends Component {
         errors.passwordConfirm = "كلمة المرور والإعادة غير متطابقتان";
       }
     }
-
+    console.log(data);
     this.setState({ data, errors });
+  };
+
+  handleCheckbox = ({ currentTarget: input }) => {
+    console.log("handle CHECKBOX called", input);
+
+    const data = { ...this.state.data };
+
+    data[input.name] = !this.state.data.accepted;
+
+    console.log(data);
+    this.setState({ data });
   };
 
   handleAccept = e => {
@@ -148,18 +160,6 @@ class Form extends Component {
       </button>
     );
   };
-
-  // renderButtonSecondary = (label, classes = "btn btn-primary") => {
-  //   return (
-  //     <button
-  //       style={{ width: "100%", marginTop: "5%" }}
-  //       className={classes}
-  //       onClick={this.checkUsername}
-  //     >
-  //       {label}
-  //     </button>
-  //   );
-  // };
 
   renderInput = (
     name,

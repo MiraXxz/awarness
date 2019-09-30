@@ -8,14 +8,17 @@ class ForgotPasswordForm extends Form {
   state = {
     data: { username: "", veriCode: "" },
     errors: {},
-    next: 33,
     valid: true,
     validCode: false,
     validUsername: false,
     buttonr: 1,
     pattern: /^(?=.*[a-z])(?=.*[0-9])/,
     resendCounter: 0,
-    cancel: 0
+    pages: {
+      goNewPass: 5,
+      goCancel: 0,
+      goCancelFirst: 1
+    }
   };
 
   schema = {
@@ -107,7 +110,8 @@ class ForgotPasswordForm extends Form {
   doSubmit = () => {
     //call to server
 
-    if (this.state.valid) this.props.callbackFromParent(this.state.next);
+    if (this.state.valid)
+      this.props.callbackFromParent(this.state.pages.goNewPass);
     // this.props.history.replace("/signin/password");
     console.log("submitted");
   };
@@ -118,6 +122,10 @@ class ForgotPasswordForm extends Form {
 
     this.setState({ validUsername: true, buttonr: 2 });
     console.log(this.state);
+  };
+
+  handleCancel = () => {
+    this.props.callbackFromParent(this.state.pages.goCancel);
   };
 
   render() {
@@ -163,6 +171,32 @@ class ForgotPasswordForm extends Form {
                 <div className="row">{this.renderButton("التالي")}</div>
               </div>
             )}
+
+            <div className="row">
+              <Link
+                replace
+                to="#"
+                onClick={this.handleResend}
+                className="btn btn-link link-padding"
+              >
+                إعادة إرسال الرمز
+              </Link>
+            </div>
+
+            {this.state.resendCounter > 0 && (
+              <div className="row">
+                {/* <FadeIn cont={this.state.resendCounter}></FadeIn> */}
+                <p className="text-white fade-in">
+                  لقد تم إعادة إرسال الرمز، الرجاء إدخال الرمز الجديد
+                </p>
+              </div>
+            )}
+
+            <div className="row pt-5">
+              <a href="#" className="text-danger" onClick={this.handleCancel}>
+                إلغاء
+              </a>
+            </div>
           </div>
         </form>
       </React.Fragment>
