@@ -99,7 +99,11 @@ class Form extends Component {
       data[input.name] = !this.state.data.accepted;
     } else data[input.name] = input.value;
 
-    if ("passwordConfirm" in this.state.data && input.name === "password") {
+    if (
+      "passwordConfirm" in this.state.data &&
+      input.name === "password" &&
+      this.state.data.passwordConfirm !== ""
+    ) {
       if (this.state.data.passwordConfirm !== data.password) {
         errors.passwordConfirm = "كلمة المرور والإعادة غير متطابقتان";
       }
