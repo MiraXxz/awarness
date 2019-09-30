@@ -155,11 +155,7 @@ class Form extends Component {
     disabled = this.validate()
   ) => {
     return (
-      <button
-        disabled={disabled}
-        style={{ width: "100%", marginTop: "5%" }}
-        className={classes}
-      >
+      <button disabled={disabled} className={classes.concat(" w-100 mt-2")}>
         {label}
       </button>
     );
