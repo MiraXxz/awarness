@@ -2,17 +2,11 @@ import React, { Component } from "react";
 import "../login.css";
 
 import loginImg from "../pictures/loginpic.jpg";
-import slideImage1 from "../pictures/slide1.jpg";
-import slideImage2 from "../pictures/slide2.jpg";
-import whiteImg from "../pictures/white.png";
 
 import UserNameForm from "./userNameForm";
-import { Route, Switch, Link } from "react-router-dom";
 import VerificationCodeForm from "./verificationCodeFrom";
 import NewPasswordForm from "./newPasswordForm";
 import AdminHomePage from "./adminHomePage";
-import PasswordForm from "./passwordForm";
-import { CSSTransition, TransitionGroup } from "react-transition-group";
 import Carousel from "./common/carousel";
 import LoginForm from "./loginform";
 import ForgotPasswordForm from "./forgotPasswordForm";
@@ -35,7 +29,6 @@ class LoginMain extends Component {
             backgroundImage: `url(${loginImg})`
           }}
         />
-        {/* <div className="img-bg-transparent" /> */}
 
         <div
           className="container-fluid main-cont m-0"
@@ -116,39 +109,6 @@ class LoginMain extends Component {
                     );
                 }
               })()}
-
-              {/* <Switch>
-                <Route path="/signin/username" component={UserNameForm} />
-                <Route path="/signin/password" component={PasswordForm} />
-                <Route path="/signinfirst" component={UserNameForm} />
-                <Route path="/login" component={UserNameForm} />
-                <Route path="/verifyaccount" component={VerificationCodeForm} />
-                <Route path="/newpassword" component={NewPasswordForm} />
-                <Route path="/adminhome" component={AdminHomePage} />
-                <Route path="/" component={UserNameForm} />
-              </Switch> */}
-
-              {/* <Route
-                render={location => (
-                  <TransitionGroup>
-                    <CSSTransition
-                      timeout={30000}
-                      className="fade"
-                      key={location.key}
-                    >
-                      <Switch location={location}>
-                        
-                      </Switch>
-                    </CSSTransition>
-                  </TransitionGroup>
-                )}
-              /> */}
-
-              {/* <UserNameForm></UserNameForm> */}
-
-              {/* <p style={{ color: "white" }}>
-                Not a member? click <Link to="#">here</Link> to Register
-              </p> */}
             </div>
 
             <div className="col main-col-2 col-xs-8 col-md-6 col-sm-6 col-lg-8 text-center align-items-center flex-column  pt-4 pr-5 pl-5 d-none d-md-block">

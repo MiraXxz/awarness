@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import Input from "./common/input";
 import Joi from "joi-browser";
-import { Link } from "react-router-dom";
 import Form from "./common/form";
 
 class ForgotPasswordForm extends Form {
@@ -173,14 +171,13 @@ class ForgotPasswordForm extends Form {
             )}
 
             <div className="row">
-              <Link
-                replace
-                to="#"
+              <a
+                href="#"
                 onClick={this.handleResend}
                 className="btn btn-link link-padding"
               >
                 إعادة إرسال الرمز
-              </Link>
+              </a>
             </div>
 
             {this.state.resendCounter > 0 && (

@@ -1,10 +1,7 @@
 import React, { Component } from "react";
 import Joi from "joi-browser";
-import Input from "./common/input";
 import Form from "./common/form";
-import { Link } from "react-router-dom";
 import "../login.css";
-import FadeIn from "./common/fadeIn";
 
 class VerificationCodeForm extends Form {
   state = {
@@ -85,19 +82,17 @@ class VerificationCodeForm extends Form {
           </div>
 
           <div className="row">
-            <Link
-              replace
-              to="#"
+            <a
+              href="#"
               onClick={this.handleResend}
               className="btn btn-link link-padding"
             >
               إعادة إرسال الرمز
-            </Link>
+            </a>
           </div>
 
           {this.state.resendCounter > 0 && (
             <div className="row">
-              {/* <FadeIn cont={this.state.resendCounter}></FadeIn> */}
               <p className="text-white fade-in">
                 لقد تم إعادة إرسال الرمز، الرجاء إدخال الرمز الجديد
               </p>
@@ -109,16 +104,6 @@ class VerificationCodeForm extends Form {
               إلغاء
             </a>
           </div>
-
-          {/* <div className="row pt-5">
-            <Link
-              replace
-              to="/signin/username"
-              className="btn btn-link text-danger link-padding"
-            >
-              إلغاء
-            </Link>
-          </div> */}
         </form>
       </React.Fragment>
     );
