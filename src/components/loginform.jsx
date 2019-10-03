@@ -127,7 +127,13 @@ class LoginForm extends Form {
             </div>
 
             <div className="row">
-              {this.renderInput("username", "الإيميل أو رقم الهاتف", "text")}
+              {this.renderInput(
+                "username",
+                "الإيميل أو رقم الهاتف",
+                "text",
+                255,
+                this.state.validUsername ? true : false
+              )}
             </div>
 
             {this.state.buttonr === 1 ? (

@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import Input from "./common/input";
 import Joi from "joi-browser";
-import { Link } from "react-router-dom";
 import Form from "./common/form";
 
 class UserNameForm extends Form {
