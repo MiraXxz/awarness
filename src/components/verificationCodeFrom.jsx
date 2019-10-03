@@ -7,7 +7,7 @@ class VerificationCodeForm extends Form {
   state = {
     data: { veriCode: "" },
     errors: {},
-    pattern: /^(?=.*[a-z])(?=.*[0-9])/,
+    pattern: /^(?=.*[0-9])/,
     resendCounter: 0,
 
     valid: true,
@@ -17,26 +17,13 @@ class VerificationCodeForm extends Form {
   schema = {
     veriCode: Joi.string()
       .required()
-      .min(6)
-      .max(6)
+
       .regex(this.state.pattern)
       .error(errors => {
         errors.forEach(err => {
           switch (err.type) {
             case "any.empty":
               err.message = "الرجاء إدخال الرمز المرسل إليك";
-              break;
-            case "string.min":
-              err.message = "يجب أن يتكون الرمز من 6 أحرف وأرقام";
-              break;
-
-            case "string.max":
-              err.message = "يجب أن يتكون الرمز من 6 أحرف وأرقام";
-              break;
-
-            case "string.regex.base":
-              err.message =
-                "يجب أن يتكون الرمز من ستة حروف على الأقل من الأحرف الإنجليزية والأرقام والرموز";
               break;
 
             default:

@@ -12,7 +12,7 @@ import LoginForm from "./loginform";
 import ForgotPasswordForm from "./forgotPasswordForm";
 
 class LoginMain extends Component {
-  state = { page: 0 };
+  state = { page: 1 };
 
   switchPage = dataFromChild => {
     console.log(dataFromChild);
