@@ -166,7 +166,8 @@ class Form extends Component {
     placeholder,
     type,
     maxlength = 255,
-    disabled = false
+    disabled = false,
+    readonly = false
   ) => {
     return (
       <Input
@@ -178,6 +179,7 @@ class Form extends Component {
         error={this.state.errors[name]}
         maxLength={maxlength}
         disabled={disabled}
+        readOnly={readonly}
       />
     );
   };

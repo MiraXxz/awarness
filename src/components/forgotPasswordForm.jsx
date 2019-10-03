@@ -146,6 +146,7 @@ class ForgotPasswordForm extends Form {
                 "الإيميل أو رقم الهاتف",
                 "text",
                 255,
+                false,
                 this.state.validUsername ? true : false
               )}
             </div>

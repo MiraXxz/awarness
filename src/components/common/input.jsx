@@ -32,6 +32,7 @@ class Input extends Component {
               className="form-control input-borders"
               maxLength={this.props.maxLength}
               disabled={this.props.disabled}
+              readOnly={this.props.readOnly}
             />
 
             {this.props.type === "password" && (
