@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Joi from "joi-browser";
-import Form from "./common/form";
-import PopUp from "./common/popUp";
+import Form from "../common/form";
+import PopUp from "../common/popUp";
 
 class NewPasswordForm extends Form {
   state = {

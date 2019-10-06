@@ -1,13 +1,12 @@
 import React, { Component } from "react";
-import "../login.css";
+import "../../login.css";
 
-import loginImg from "../pictures/loginpic.jpg";
+import loginImg from "../../pictures/loginpic.jpg";
 
-import UserNameForm from "./userNameForm";
 import VerificationCodeForm from "./verificationCodeFrom";
 import NewPasswordForm from "./newPasswordForm";
-import AdminHomePage from "./adminHomePage";
-import Carousel from "./common/carousel";
+import AdminHomePage from "../subAdminHomepage/adminHomePage";
+import Carousel from "../common/carousel";
 import LoginForm from "./loginform";
 import ForgotPasswordForm from "./forgotPasswordForm";
 
@@ -105,7 +104,11 @@ class LoginMain extends Component {
 
                   default:
                     return (
-                      <UserNameForm callbackFromParent={this.switchPage} />
+                      <LoginForm
+                        forgot={false}
+                        firstTime={false}
+                        callbackFromParent={this.switchPage}
+                      />
                     );
                 }
               })()}

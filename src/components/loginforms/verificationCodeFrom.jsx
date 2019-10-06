@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Joi from "joi-browser";
-import Form from "./common/form";
-import "../login.css";
+import Form from "../common/form";
+import "../../login.css";
 
 class VerificationCodeForm extends Form {
   state = {
